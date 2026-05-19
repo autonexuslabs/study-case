@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AutoNexus — Real Estate AI Automation Case Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F7F5F0;
+  --surface: #FFFFFF;
+  --surface2: #F0EDE6;
+  --text: #1A1916;
+  --text2: #6B6860;
+  --text3: #9C9A95;
+  --accent: #1B4FD8;
+  --accent-light: #E8EEFB;
+  --green: #166534;
+  --green-light: #DCFCE7;
+  --amber: #92400E;
+  --amber-light: #FEF3C7;
+  --border: rgba(26,25,22,0.10);
+  --radius: 12px;
+  --radius-sm: 8px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+
+/* NAV */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(247,245,240,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 0;
+}
+.nav-inner {
+  max-width: 720px; margin: 0 auto; padding: 0 24px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; }
+.logo-mark {
+  width: 30px; height: 30px; background: var(--accent);
+  border-radius: 7px; display: flex; align-items: center; justify-content: center;
+}
+.logo-mark svg { width: 16px; height: 16px; fill: #fff; }
+.logo-text { font-size: 15px; font-weight: 500; color: var(--text); letter-spacing: -0.01em; }
+.nav-cta {
+  background: var(--text); color: #fff; border: none; cursor: pointer;
+  padding: 8px 18px; border-radius: 20px; font-size: 13px;
+  font-weight: 500; font-family: 'DM Sans', sans-serif; transition: opacity .2s;
+}
+.nav-cta:hover { opacity: 0.8; }
+
+/* HERO */
+.hero { padding: 72px 0 56px; }
+.live-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--green-light); color: var(--green);
+  font-size: 12px; font-weight: 500; padding: 5px 12px;
+  border-radius: 20px; margin-bottom: 24px;
+}
+.live-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--green); animation: blink 1.6s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+.hero h1 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(30px, 5vw, 44px); font-weight: 400;
+  line-height: 1.2; letter-spacing: -0.02em;
+  color: var(--text); margin-bottom: 16px;
+}
+.hero h1 em { font-style: italic; color: var(--accent); }
+.hero-sub { font-size: 16px; color: var(--text2); line-height: 1.65; max-width: 580px; margin-bottom: 32px; }
+
+.client-card {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 14px 16px;
+  max-width: 400px;
+}
+.avatar {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: var(--accent-light); color: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 500; flex-shrink: 0;
+}
+.client-info { flex: 1; }
+.client-name { font-size: 14px; font-weight: 500; color: var(--text); }
+.client-role { font-size: 12px; color: var(--text3); margin-top: 1px; }
+.verified {
+  font-size: 11px; font-weight: 500; background: var(--green-light);
+  color: var(--green); padding: 3px 8px; border-radius: 10px; white-space: nowrap;
+}
+
+/* STATS */
+.stats { padding: 40px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin: 40px 0; }
+.stats-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; }
+.stat-item { padding: 0 20px 0 0; }
+.stat-item + .stat-item { padding-left: 20px; border-left: 1px solid var(--border); }
+.stat-number {
+  font-family: 'Instrument Serif', serif; font-size: 36px;
+  font-weight: 400; color: var(--text); line-height: 1; margin-bottom: 6px;
+}
+.stat-label { font-size: 12px; color: var(--text3); line-height: 1.4; }
+.stat-delta { font-size: 11px; color: var(--green); font-weight: 500; margin-top: 4px; }
+
+/* SECTION */
+.section { margin-bottom: 56px; }
+.section-eyebrow {
+  font-size: 11px; font-weight: 500; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--text3); margin-bottom: 16px;
+}
+.section h2 {
+  font-family: 'Instrument Serif', serif; font-size: 26px;
+  font-weight: 400; line-height: 1.3; margin-bottom: 24px; letter-spacing: -0.01em;
+}
+
+/* FLOW */
+.flow {
+  display: flex; align-items: flex-start; gap: 0;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 24px 20px; overflow-x: auto;
+}
+.flow-step { display: flex; flex-direction: column; align-items: center; gap: 8px; flex: 1; min-width: 90px; }
+.flow-icon {
+  width: 44px; height: 44px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.flow-icon svg { width: 20px; height: 20px; }
+.flow-label { font-size: 11px; color: var(--text2); text-align: center; line-height: 1.3; }
+.flow-time { font-size: 10px; font-weight: 500; padding: 2px 8px; border-radius: 10px; margin-top: 2px; }
+.flow-arrow { color: var(--border); font-size: 20px; margin: 0 4px; padding-top: 12px; flex-shrink: 0; }
+
+/* SERVICES */
+.services { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.srv {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 20px;
+  transition: border-color .2s;
+}
+.srv:hover { border-color: rgba(26,25,22,0.25); }
+.srv-icon {
+  width: 36px; height: 36px; border-radius: var(--radius-sm);
+  display: flex; align-items: center; justify-content: center; margin-bottom: 12px;
+}
+.srv-icon svg { width: 18px; height: 18px; }
+.srv-name { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
+.srv-desc { font-size: 13px; color: var(--text2); line-height: 1.55; }
+
+/* TIMELINE */
+.timeline { display: flex; flex-direction: column; gap: 0; }
+.tl-item { display: flex; gap: 16px; padding-bottom: 28px; position: relative; }
+.tl-item:last-child { padding-bottom: 0; }
+.tl-left { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+.tl-dot {
+  width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; margin-top: 5px;
+  border: 2px solid;
+}
+.tl-line {
+  width: 1px; flex: 1; margin-top: 6px;
+  background: var(--border);
+}
+.tl-item:last-child .tl-line { display: none; }
+.tl-date { font-size: 12px; color: var(--text3); min-width: 60px; padding-top: 3px; flex-shrink: 0; }
+.tl-body { flex: 1; }
+.tl-title { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 4px; }
+.tl-desc { font-size: 13px; color: var(--text2); line-height: 1.55; }
+.tl-badge {
+  display: inline-block; font-size: 11px; font-weight: 500;
+  padding: 2px 8px; border-radius: 10px; margin-top: 6px;
+}
+
+/* QUOTE */
+.quote {
+  border-left: 2px solid var(--accent); padding: 20px 24px;
+  background: var(--surface); border-radius: 0 var(--radius) var(--radius) 0;
+  margin: 40px 0;
+}
+.quote blockquote {
+  font-family: 'Instrument Serif', serif; font-size: 19px;
+  font-style: italic; color: var(--text); line-height: 1.55; margin-bottom: 12px;
+}
+.quote cite { font-size: 13px; color: var(--text3); font-style: normal; }
+
+/* CTA */
+.cta-section {
+  background: var(--text); border-radius: var(--radius);
+  padding: 48px 40px; text-align: center; margin: 40px 0 64px;
+}
+.cta-section h2 {
+  font-family: 'Instrument Serif', serif; font-size: 30px;
+  font-weight: 400; color: #fff; margin-bottom: 12px; letter-spacing: -0.01em;
+}
+.cta-section p { font-size: 15px; color: rgba(255,255,255,0.65); margin-bottom: 32px; line-height: 1.6; }
+
+.reply-box {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: var(--radius); padding: 24px;
+  max-width: 440px; margin: 0 auto 20px;
+}
+.reply-label { font-size: 12px; color: rgba(255,255,255,0.5); margin-bottom: 8px; text-align: left; }
+.reply-to {
+  font-size: 14px; color: rgba(255,255,255,0.9);
+  font-weight: 500; text-align: left; margin-bottom: 16px;
+}
+.reply-addr { color: #7BA7F5; }
+.reply-input {
+  width: 100%; background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15); border-radius: var(--radius-sm);
+  padding: 12px 14px; color: #fff; font-family: 'DM Sans', sans-serif;
+  font-size: 14px; resize: none; min-height: 80px; outline: none;
+  transition: border-color .2s;
+}
+.reply-input::placeholder { color: rgba(255,255,255,0.3); }
+.reply-input:focus { border-color: rgba(255,255,255,0.4); }
+.reply-btn {
+  width: 100%; margin-top: 12px; padding: 13px;
+  background: var(--accent); color: #fff; border: none;
+  border-radius: var(--radius-sm); font-family: 'DM Sans', sans-serif;
+  font-size: 14px; font-weight: 500; cursor: pointer; transition: opacity .2s;
+}
+.reply-btn:hover { opacity: 0.88; }
+.reply-btn:disabled { opacity: 0.5; cursor: default; }
+.cta-note { font-size: 12px; color: rgba(255,255,255,0.35); }
+
+/* SUCCESS */
+.success-msg {
+  display: none; background: rgba(22,101,52,0.2);
+  border: 1px solid rgba(22,101,52,0.4); border-radius: var(--radius);
+  padding: 20px 24px; text-align: center; max-width: 440px; margin: 0 auto;
+}
+.success-msg .s-icon { font-size: 28px; margin-bottom: 8px; }
+.success-msg p { font-size: 14px; color: rgba(255,255,255,0.8); line-height: 1.55; }
+
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--border); padding: 24px 0;
+  text-align: center;
+}
+footer p { font-size: 13px; color: var(--text3); }
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero, .stats, .section { animation: fadeUp .6s ease both; }
+.section { animation-delay: .1s; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      </div>
+      <span class="logo-text">AutoNexus</span>
+    </a>
+    <button class="nav-cta" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Get in touch</button>
+  </div>
+</nav>
+
+<div class="container">
+
+  <div class="hero">
+    <div class="live-pill">
+      <span class="live-dot"></span>
+      Active system — live results
+    </div>
+    <h1>How a Dallas agent stopped losing leads and started booking <em>3x more showings</em></h1>
+    <p class="hero-sub">Sarah was missing 60% of her leads because she couldn't respond fast enough. We automated her entire pipeline. Here's what happened in 30 days.</p>
+    <div class="client-card">
+      <div class="avatar">SM</div>
+      <div class="client-info">
+        <div class="client-name">Sarah M.</div>
+        <div class="client-role">Independent Realtor · Dallas, TX · Zillow Premier Agent</div>
+      </div>
+      <span class="verified">✓ Verified</span>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-number">60s</div>
+        <div class="stat-label">Average lead response time</div>
+        <div class="stat-delta">↓ was 4+ hours</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">3x</div>
+        <div class="stat-label">More booked showings</div>
+        <div class="stat-delta">↑ vs previous month</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">0</div>
+        <div class="stat-label">Missed weekend leads</div>
+        <div class="stat-delta">↓ was ~12/month</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">18h</div>
+        <div class="stat-label">Saved per week on follow-up</div>
+        <div class="stat-delta">↑ back to selling</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-eyebrow">How it works</div>
+    <h2>Lead to booked showing — automatically</h2>
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-icon" style="background:#E8EEFB">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1B4FD8" stroke-width="2"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        </div>
+        <div class="flow-label">New lead arrives</div>
+        <div class="flow-time" style="background:#E8EEFB;color:#1B4FD8">Zillow / Realtor</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="flow-icon" style="background:#FEF3C7">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#92400E" stroke-width="2"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+        </div>
+        <div class="flow-label">AI responds instantly</div>
+        <div class="flow-time" style="background:#FEF3C7;color:#92400E">under 60 sec</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="flow-icon" style="background:#F3E8FF">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#6B21A8" stroke-width="2"><path d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-.293.707L13 13.414V19a1 1 0 01-.553.894l-4 2A1 1 0 017 21v-7.586L3.293 6.707A1 1 0 013 6V4z"/></svg>
+        </div>
+        <div class="flow-label">Lead qualified</div>
+        <div class="flow-time" style="background:#F3E8FF;color:#6B21A8">auto-sorted</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="flow-icon" style="background:#DCFCE7">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="2"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+        </div>
+        <div class="flow-label">Showing booked</div>
+        <div class="flow-time" style="background:#DCFCE7;color:#166534">auto calendar</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="flow-icon" style="background:#FEE2E2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#991B1B" stroke-width="2"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+        </div>
+        <div class="flow-label">Only serious buyers</div>
+        <div class="flow-time" style="background:#FEE2E2;color:#991B1B">zero wasted time</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-eyebrow">Services</div>
+    <h2>Everything we handle for you</h2>
+    <div class="services">
+      <div class="srv">
+        <div class="srv-icon" style="background:#E8EEFB">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1B4FD8" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.071 4.929a10 10 0 010 14.142M4.929 4.929a10 10 0 000 14.142"/></svg>
+        </div>
+        <div class="srv-name">Lead generation</div>
+        <div class="srv-desc">Automated capture from Zillow, Realtor.com, Facebook Ads and website forms into one unified pipeline.</div>
+      </div>
+      <div class="srv">
+        <div class="srv-icon" style="background:#F3E8FF">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#6B21A8" stroke-width="2"><path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h16a2 2 0 012 2v10a2 2 0 01-2 2h-2"/></svg>
+        </div>
+        <div class="srv-name">Lead qualification via AI</div>
+        <div class="srv-desc">AI asks the right questions and scores each lead — you only speak to buyers who are ready to move.</div>
+      </div>
+      <div class="srv">
+        <div class="srv-icon" style="background:#FEF3C7">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#92400E" stroke-width="2"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+        </div>
+        <div class="srv-name">Follow-up automation</div>
+        <div class="srv-desc">Multi-step sequences sent automatically over days and weeks — no lead ever goes cold again.</div>
+      </div>
+      <div class="srv">
+        <div class="srv-icon" style="background:#DCFCE7">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="2"><path d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"/></svg>
+        </div>
+        <div class="srv-name">CRM pipeline setup & management</div>
+        <div class="srv-desc">Full CRM configuration and ongoing management — every lead tracked, every stage visible.</div>
+      </div>
+      <div class="srv">
+        <div class="srv-icon" style="background:#E0F2FE">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#075985" stroke-width="2"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+        </div>
+        <div class="srv-name">Appointment booking systems</div>
+        <div class="srv-desc">Qualified buyers book directly into your calendar — no back-and-forth, no scheduling friction.</div>
+      </div>
+      <div class="srv">
+        <div class="srv-icon" style="background:#FEE2E2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#991B1B" stroke-width="2"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        </div>
+        <div class="srv-name">Instant response systems</div>
+        <div class="srv-desc">Every inquiry answered within 60 seconds — even at midnight, even on weekends.</div>
+      </div>
+      <div class="srv" style="grid-column: 1 / -1;">
+        <div class="srv-icon" style="background:#F1F5F9">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="2"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <div class="srv-name">Maintenance, debugging & technical support</div>
+        <div class="srv-desc">Ongoing monitoring and support — the system keeps running and improving over time. You focus on selling.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-eyebrow">Implementation</div>
+    <h2>From zero to running in under two weeks</h2>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-dot" style="background:#1B4FD8;border-color:#1B4FD8"></div>
+          <div class="tl-line"></div>
+        </div>
+        <div class="tl-date">Day 1–3</div>
+        <div class="tl-body">
+          <div class="tl-title">Audit & setup</div>
+          <div class="tl-desc">Reviewed Sarah's lead sources, existing tools, and workflow. CRM configured, integrations mapped.</div>
+          <span class="tl-badge" style="background:#E8EEFB;color:#1B4FD8">Discovery</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-dot" style="background:#92400E;border-color:#92400E"></div>
+          <div class="tl-line"></div>
+        </div>
+        <div class="tl-date">Day 4–7</div>
+        <div class="tl-body">
+          <div class="tl-title">Automation built</div>
+          <div class="tl-desc">Instant response, lead qualification, and follow-up sequences deployed and fully tested.</div>
+          <span class="tl-badge" style="background:#FEF3C7;color:#92400E">Build</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-dot" style="background:#6B21A8;border-color:#6B21A8"></div>
+          <div class="tl-line"></div>
+        </div>
+        <div class="tl-date">Day 8–14</div>
+        <div class="tl-body">
+          <div class="tl-title">Live & optimised</div>
+          <div class="tl-desc">System went live. First automated responses within 24 hours. Tweaked based on real lead behaviour.</div>
+          <span class="tl-badge" style="background:#F3E8FF;color:#6B21A8">Launch</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-dot" style="background:#166534;border-color:#166534"></div>
+        </div>
+        <div class="tl-date">Day 30</div>
+        <div class="tl-body">
+          <div class="tl-title">Results</div>
+          <div class="tl-desc">3x more booked showings. 18 hours saved per week. Zero missed leads across two full weekends.</div>
+          <span class="tl-badge" style="background:#DCFCE7;color:#166534">Results</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="quote">
+    <blockquote>"I used to spend my mornings chasing leads that had already gone cold. Now I wake up and my calendar already has showings booked. I haven't manually followed up with a single lead in three weeks."</blockquote>
+    <cite>Sarah M. · Independent Realtor · Dallas, TX</cite>
+  </div>
+
+  <div class="cta-section" id="cta">
+    <h2>See if this fits your business</h2>
+    <p>Reply with two or three times that work for you and we'll jump on a quick Zoom to walk through your pipeline — no commitment, no obligation.</p>
+
+    <div id="reply-form">
+      <div class="reply-box">
+        <div class="reply-label">To</div>
+        <div class="reply-to"><span class="reply-addr">contact@autonexus.com</span></div>
+        <div class="reply-label">Your message</div>
+        <textarea class="reply-input" id="msg-input" placeholder="Hi, I'm interested. I'm free Tuesday at 2pm or Wednesday morning — does that work?"></textarea>
+        <button class="reply-btn" id="send-btn" onclick="handleSend()">Send reply</button>
+      </div>
+      <p class="cta-note">We respond within a few hours. No sales pressure.</p>
+    </div>
+
+    <div class="success-msg" id="success">
+      <div class="s-icon">✓</div>
+      <p>Message sent. We'll reply within a few hours to confirm a time that works.</p>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="container">
+    <p>AutoNexus · AI Automation for Real Estate · contact@autonexus.com</p>
+  </div>
+</footer>
+
+<script>
+function handleSend(){
+  const msg = document.getElementById('msg-input').value.trim();
+  const btn = document.getElementById('send-btn');
+  if(!msg){ document.getElementById('msg-input').focus(); return; }
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+  setTimeout(()=>{
+    document.getElementById('reply-form').style.display='none';
+    const s = document.getElementById('success');
+    s.style.display='block';
+  }, 900);
+}
+</script>
+</body>
+</html>
